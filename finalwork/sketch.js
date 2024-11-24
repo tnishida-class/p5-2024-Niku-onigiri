@@ -4,7 +4,7 @@ let x, y, vn;
 let m, n;
 let ground;
 const g = 1 / 2;
-const jump = 15;
+const jump = 10;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
