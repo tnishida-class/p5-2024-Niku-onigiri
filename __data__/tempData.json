@@ -10844,6 +10844,1596 @@
           ]
         }
       }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "11/24/2024, 11:11:18 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "sketch.js",
+              "content": "// 最終課題を制作しよう\r\nlet snows = [];\r\nlet x, y, vn;\r\nlet m, n;\r\nlet ground;\r\nconst g = 1 / 2;\r\nconst jump = 10;\r\n\r\nfunction setup() {\r\n  createCanvas(windowWidth, windowHeight);\r\n  x = width / 2;\r\n  y = windowHeight - 50;\r\n  m = width / 2;\r\n  n = windowHeight - 125;\r\n  ground = 25;\r\n  vn = 0;\r\n}\r\n\r\nfunction draw() {\r\n  background(160, 192, 255);\r\n\r\n  x += random(-30, 30);\r\n  if (x < 0) {\r\n    x = 0\r\n  }\r\n  if (x > width) {\r\n    x = width\r\n  }\r\n\r\n  if (m < 0) {\r\n    m = 0\r\n  }\r\n  if (m > width) {\r\n    m = width\r\n  }\r\n\r\n  n += vn;\r\n\r\n  if (n < height - ground - 100) {\r\n    vn += g;\r\n  }\r\n  else {\r\n    vn = 0;\r\n    n = height - ground - 100;\r\n  }\r\n\r\n  noStroke();\r\n  fill(100, 100, 200);\r\n  arc(m, n, 100, 100, PI, TWO_PI, CHORD);\r\n\r\n  fill(255);\r\n  rect(0, height - ground, width, height);\r\n\r\n  stroke(50);\r\n  strokeWeight(2);\r\n  line(m, n, m, n + 50);\r\n\r\n  noStroke();\r\n  fill(255, 228, 181);\r\n  ellipse(x, y, 90, 75);\r\n  ellipse(x - 27, y - 33, 15);\r\n  ellipse(x + 27, y - 33, 15);\r\n\r\n  stroke(50);\r\n  strokeWeight(2);\r\n  line(x - 25, y - 8, x - 15, y - 8);\r\n  line(x - 25, y - 6, x - 15, y - 6);\r\n  line(x + 25, y - 8, x + 15, y - 8);\r\n  line(x + 25, y - 6, x + 15, y - 6);\r\n  line(x - 10, y + 15, x, y + 10);\r\n  line(x, y + 10, x + 10, y + 15);\r\n\r\n  if (keyIsDown(\"D\".charCodeAt(0))) { m += 5; }\r\n  if (keyIsDown(\"A\".charCodeAt(0))) { m -= 5; }\r\n\r\n  if (frameCount % 10 === 0) {\r\n    snows.push({\r\n      x: random(width),\r\n      y: 0,\r\n      size: random(5, 15),\r\n      speed: random(1, 3),\r\n    });\r\n  }\r\n  for (let i = snows.length - 1; i >= 0; i--) {\r\n    let s = snows[i];\r\n    fill(255);\r\n    noStroke();\r\n    ellipse(s.x, s.y, s.size);\r\n\r\n    s.y += s.speed;\r\n\r\n    if (s.y > height) {\r\n      snows.splice(i, 1);\r\n    }\r\n  }\r\n}\r\n\r\nfunction keyPressed() {\r\n  if (key == \" \")\r\n    if (n >= height - ground - 100) {\r\n      vn = -jump;\r\n    }\r\n}\r\n\r\n\r\nfunction windowResized() {\r\n  resizeCanvas(windowWidth, windowHeight);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/10/2024, 10:39:54 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".list-rst__calendar-frame\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/10/2024, 10:43:29 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/10/2024, 10:48:31 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": ".o365cs-base, .o365sx-appName, .o365sx-button {\r\n    background-color: #5eb954 !important;\r\n  }"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/10/2024, 10:53:22 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://outlook.office.com/mail/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/17/2024, 11:08:14 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://outlook.office.com/mail/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://developers.google.com/workspace?hl=ja\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "12/17/2024, 11:11:09 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".devsite-landing-row-group\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/21/2025, 11:25:42 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://outlook.office.com/mail/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/21/2025, 11:29:52 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed_list\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/21/2025, 12:00:46 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://outlook.office.com/mail/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 10:46:57 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 10:56:40 AM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:11:54 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('画像のURL');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:15:59 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "html {\r\n  background-color: #00539f;\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:17:14 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('画像のURL');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:19:23 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:20:23 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": ".jNMkif {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:20:37 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": ".jNMkif {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:22:47 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": ".jNMkif {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg');\r\n  background-size: cover; /* 背景画像を画面いっぱいに表示 */\r\n  background-position: center; /* 背景画像を中央に配置 */\r\n  background-repeat: no-repeat; /* 背景画像を繰り返さない */\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:35:08 AM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Remove Unnecessary Parts from Tabelog etc.\",\r\n    \"version\": \"0.1\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/?hl=ja\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:36:13 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg');\r\n  background-size: cover; /* 背景画像が画面いっぱいに広がる */\r\n  background-position: center; /* 画像の位置を中央に */\r\n  background-repeat: no-repeat; /* 画像が繰り返されないように */\r\n  height: 100vh; /* ビューポートの高さを100%に */\r\n  margin: 0; /* 余白をなくす */\r\n  display: flex;\r\n  justify-content: center; /* 中央に配置 */\r\n  align-items: center; /* 中央に配置 */\r\n  font-family: Arial, sans-serif; /* フォントを指定 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:42:49 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  /* 白背景を削除し、背景画像を設定 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg'); /* 画像のURLを指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 中央に配置 */\r\n  background-repeat: no-repeat; /* 繰り返しを防止 */\r\n  background-attachment: fixed; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:44:26 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  /* 白背景を削除し、背景画像を設定 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 中央に配置 */\r\n  background-repeat: no-repeat; /* 繰り返しを防止 */\r\n  background-attachment: fixed; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:46:03 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  /* 白背景を削除し、背景画像を設定 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 中央に配置 */\r\n  background-repeat: no-repeat; /* 繰り返しを防止 */\r\n  background-attachment: fixed; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:48:50 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 中央に配置 */\r\n  background-repeat: no-repeat; /* 繰り返しを防止 */\r\n  background-attachment: fixed; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:50:06 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat !important; /* 繰り返しを防止 */\r\n  background-attachment: fixed !important; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 11:50:51 AM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat ; /* 繰り返しを防止 */\r\n  background-attachment: fixed ; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 12:00:54 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://tenor.com/ja/view/coach-point-laugh-football-field-gif-4859989') !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat ; /* 繰り返しを防止 */\r\n  background-attachment: fixed ; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 12:04:45 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url(coach-point.gif) !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat ; /* 繰り返しを防止 */\r\n  background-attachment: fixed ; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 12:05:16 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('coach-point.gif') !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat ; /* 繰り返しを防止 */\r\n  background-attachment: fixed ; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "1/28/2025, 12:13:17 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 画像のURLを指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 中央に配置 */\r\n  background-repeat: no-repeat ; /* 繰り返しを防止 */\r\n  background-attachment: fixed ; /* スクロールしても背景固定 */\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:01:05 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"*://www.google.com/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:06:41 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJzdGNsc2FmMDNyc2p4dmtzYTh4aGpvejcwMmw5N3B3anR2cGVwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cYZkY9HeKgofpQnOUl/giphy.gif\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:08:00 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJzdGNsc2FmMDNyc2p4dmtzYTh4aGpvejcwMmw5N3B3anR2cGVwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cYZkY9HeKgofpQnOUl/giphy.gif\") no-repeat center center fixed;\r\n  background-color: none  !important;\r\n  background-size: cover;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:08:56 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExejJzdGNsc2FmMDNyc2p4dmtzYTh4aGpvejcwMmw5N3B3anR2cGVwMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cYZkY9HeKgofpQnOUl/giphy.gif\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:09:29 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:11:03 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/?hl=ja\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:11:35 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"*://www.google.com/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:12:14 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://giphy.com/gifs/moodman-funny-dog-cYZkY9HeKgofpQnOUl\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:14:05 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://giphy.com/gifs/moodman-funny-dog-cYZkY9HeKgofpQnOUlhttps://png.pngtree.com/png-clipart/20201128/ourmid/pngtree-light-effect-aura-png-image_2441310.jpg\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:16:52 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: url(\"https://mdn.github.io/shared-assets/images/examples/balloons.jpg\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:17:40 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url(\"https://mdn.github.io/shared-assets/images/examples/balloons.jpg\") no-repeat center center fixed;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:18:16 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url(\"https://mdn.github.io/shared-assets/images/examples/balloons.jpg\") no-repeat center center fixed;\r\n  background-color: transparent !important;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:20:51 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url(\"https://mdn.github.io/shared-assets/images/examples/balloons.jpg\") no-repeat center center fixed;\r\n  background: none !important;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:22:04 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background-image: url(\"https://mdn.github.io/shared-assets/images/examples/balloons.jpg\") no-repeat center center fixed;\r\n  background: none !important;\r\n  background-size: cover;\r\n}\r\n\r\n#logo {\r\n  background: transparent !important;\r\n}\r\n\r\n/* 検索ボックスの背景を半透明にする（オプション）*/\r\ninput.gLFyf {\r\n  background: rgba(255, 255, 255, 0.8) !important;\r\n  border-radius: 8px;\r\n}\r\n\r\nbody {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg'); /* 背景画像を指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:22:11 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg'); /* 背景画像を指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:22:55 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://mdn.github.io/shared-assets/images/examples/balloons.jpg') !important; /* 背景画像を指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:23:15 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/?hl=ja\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:24:12 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  background-size: cover; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:25:08 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:28:07 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"*://www.google.com/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:32:49 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  background-size: cover !important; /* 画面全体に拡大縮小 */\r\n  background-position: center !important; /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:34:52 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n   /* 画面全体に拡大縮小 */\r\n   /* 画像を中央に配置 */\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:37:07 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:38:33 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:39:00 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/\", \"https://www.google.com/?hl=*\"],\r\n        \"css\": [\"mystyle.css\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:40:20 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:46:31 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: contrast(200%);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:47:45 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: sepia(100%);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:52:17 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: sepia(100%) drop-shadow(16px 16px 20px red) invert(75%);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:53:07 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) drop-shadow(16px 16px 20px red) invert(75%);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:54:16 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) drop-shadow(16px 16px 10px black) invert(75%);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:54:58 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(50);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:55:16 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(3);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 7:55:31 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:16:25 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\ntextarea{\r\n  animation-name:slidein;\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:17:26 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\ntextarea{\r\n  animation-name:slidein;\r\n}\r\n@keyframes slidein {\r\n  from {\r\n    margin-left: 100%;\r\n    width: 300%;\r\n  }\r\n\r\n  to {\r\n    margin-left: 0%;\r\n    width: 100%;\r\n  }\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:18:27 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\ntextarea{\r\n  animation-name:slidein !important;\r\n}\r\n@keyframes slidein {\r\n  from {\r\n    margin-left: 100%;\r\n    width: 300%;\r\n  }\r\n\r\n  to {\r\n    margin-left: 0%;\r\n    width: 100%;\r\n  }\r\n}"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:21:14 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/\", \"https://www.google.com/?hl=*\"],\r\n        \"css\": [\"mystyle.css\"],\r\n        \"js\": [\"content.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:22:21 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes textGlow {\r\n  0% { color: #4285F4; text-shadow: 0 0 5px rgba(66, 133, 244, 0.8); }\r\n  25% { color: #EA4335; text-shadow: 0 0 10px rgba(234, 67, 53, 0.8); }\r\n  50% { color: #FBBC05; text-shadow: 0 0 15px rgba(251, 188, 5, 0.8); }\r\n  75% { color: #34A853; text-shadow: 0 0 10px rgba(52, 168, 83, 0.8); }\r\n  100% { color: #4285F4; text-shadow: 0 0 5px rgba(66, 133, 244, 0.8); }\r\n}\r\n\r\n/* アニメーションを適用 */\r\ninput.gLFyf {\r\n  transition: all 0.3s ease-in-out;\r\n}\r\n\r\n.animated-text {\r\n  animation: textGlow 1.5s infinite alternate;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:22:48 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      {\r\n        \"matches\": [\"https://tabelog.com/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://www.google.com/\", \"https://www.google.com/?hl=*\"],\r\n        \"css\": [\"mystyle.css\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:22:52 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n  let searchBox = document.querySelector(\"input.gLFyf\"); // Googleの検索ボックス\r\n\r\n  if (searchBox) {\r\n      searchBox.addEventListener(\"input\", function () {\r\n          if (searchBox.value.length > 0) {\r\n              searchBox.classList.add(\"animated-text\");\r\n          } else {\r\n              searchBox.classList.remove(\"animated-text\");\r\n          }\r\n      });\r\n  }\r\n});\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:26:07 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n  let searchBox = document.querySelector(\"input.gLFyf\"); // Googleの検索ボックス\r\n\r\n  if (searchBox) {\r\n      searchBox.addEventListener(\"input\", function () {\r\n          searchBox.classList.remove(\"bounce-animation\"); // 既存のアニメーションをリセット\r\n          void searchBox.offsetWidth; // 強制的に再描画（アニメーションをリスタート）\r\n          searchBox.classList.add(\"bounce-animation\"); // 再度アニメーション適用\r\n      });\r\n  }\r\n});\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:26:35 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes bounceText {\r\n  0% { transform: scale(1); }\r\n  30% { transform: scale(1.2); }\r\n  60% { transform: scale(0.9); }\r\n  100% { transform: scale(1); }\r\n}\r\n\r\n/* 検索ボックスのスタイル */\r\ninput.gLFyf {\r\n  transition: all 0.2s ease-in-out;\r\n}\r\n\r\n/* 文字が入力されたときにバウンドする */\r\n.bounce-animation {\r\n  animation: bounceText 0.3s ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:30:07 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n  function applyAnimation() {\r\n      let searchBox = document.querySelector(\"textarea.YacQv, input.gLFyf\"); // どちらのクラス名でも取得\r\n\r\n      if (searchBox) {\r\n          searchBox.addEventListener(\"input\", function () {\r\n              searchBox.classList.remove(\"bounce-animation\"); // 既存のアニメーションをリセット\r\n              void searchBox.offsetWidth; // 強制的に再描画（アニメーションをリスタート）\r\n              searchBox.classList.add(\"bounce-animation\"); // 再度アニメーション適用\r\n          });\r\n      }\r\n  }\r\n\r\n  // 初回実行\r\n  applyAnimation();\r\n\r\n  // 動的に検索ボックスが変更された場合にも対応\r\n  let observer = new MutationObserver(applyAnimation);\r\n  observer.observe(document.body, { childList: true, subtree: true });\r\n});\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:30:35 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes bounceText {\r\n  0% { transform: scale(1); }\r\n  30% { transform: scale(1.2); }\r\n  60% { transform: scale(0.9); }\r\n  100% { transform: scale(1); }\r\n}\r\n\r\n/* 文字が入力されたときにバウンドする */\r\n.bounce-animation {\r\n  animation: bounceText 0.3s ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:37:12 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:38:07 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes swingLogo {\r\n  0% { transform: rotate(0deg); }\r\n  25% { transform: rotate(5deg); }\r\n  50% { transform: rotate(0deg); }\r\n  75% { transform: rotate(-5deg); }\r\n  100% { transform: rotate(0deg); }\r\n}\r\n\r\n/* Googleロゴのアニメーション */\r\nimg[alt=\"Google\"] {\r\n  animation: swingLogo 1.5s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:46:23 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\ndocument.addEventListener(\"DOMContentLoaded\", function () {\r\n  let googleLogo = document.querySelector('img[alt=\"Google\"]'); // Googleロゴを取得\r\n\r\n  if (googleLogo) {\r\n      setInterval(() => {\r\n          let randomX = Math.random() * 20 - 10; // -10px 〜 +10px\r\n          let randomY = Math.random() * 20 - 10; // -10px 〜 +10px\r\n          googleLogo.style.transform = `translate(${randomX}px, ${randomY}px)`;\r\n      }, 500); // 0.5秒ごとに移動\r\n  }\r\n});\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:46:32 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:46:59 PM",
+          "sources": [
+            {
+              "fileExtension": "js",
+              "filename": "content_script.js",
+              "content": "let calendars = document.querySelectorAll(\".newsFeed\");\r\nfor(let i = 0; i < calendars.length; i++){\r\n  let e = calendars[i];\r\n  e.style.display = 'none';\r\n}\r\n\r\n\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:47:03 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes swingLogo {\r\n  0% { transform: rotate(0deg); }\r\n  25% { transform: rotate(5deg); }\r\n  50% { transform: rotate(0deg); }\r\n  75% { transform: rotate(-5deg); }\r\n  100% { transform: rotate(0deg); }\r\n}\r\n\r\n/* Googleロゴのアニメーション */\r\nimg[alt=\"Google\"] {\r\n  animation: swingLogo 1.5s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:48:11 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.2); } /* 20%拡大 */\r\n  100% { transform: scale(1); }\r\n}\r\n\r\n/* Googleロゴに拡大縮小アニメーションを適用 */\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:49:30 PM",
+          "sources": [
+            {
+              "fileExtension": "",
+              "filename": "manifest.json",
+              "content": "{\r\n    \"name\": \"Sample Chrome Extension\",\r\n    \"description\": \"Google検索画面の背景をGIFに変更する etc.\",\r\n    \"version\": \"1.0\",\r\n    \"manifest_version\": 3,\r\n    \"content_scripts\": [\r\n      \r\n      {\r\n        \"matches\":[\"https://www.google.com/\", \"https://www.google.com/?hl=*\"],\r\n        \"css\": [\"mystyle.css\"],\r\n        \"js\": [\"content_script.js\"]\r\n      },\r\n      {\r\n        \"matches\":[\"https://news.yahoo.co.jp/*\"],\r\n        \"js\": [\"content_script.js\"]\r\n      }\r\n    ]\r\n  }\r\n  "
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:50:05 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important; /* 背景画像を指定 */\r\n  \r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\n/* Googleロゴに拡大縮小アニメーションを適用 */\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:51:22 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important; /* 白背景を削除 */\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\n/* Googleロゴに拡大縮小アニメーションを適用 */\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:52:10 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\ntextarea {\r\n  background: none !important;\r\n  background-color: antiquewhite;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:53:21 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\ntextarea {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:54:25 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:55:31 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  color: black !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:57:17 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border-color: black !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 9:59:29 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 2px solid #4285F4 !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:00:01 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 5px solid #4285F4 !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:00:27 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 5px solid white !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:00:42 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 5px white !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:01:07 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 5px solid #4285F4 !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:01:11 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 2px solid #4285F4 !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:01:15 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.SDkEP {\r\n  background: none !important;\r\n  background-color: antiquewhite !important;\r\n  border: 2px solid #4285F4 !important;  /* 青色の枠線を追加 */\r\n  border-radius: 4px !important;  /* 枠線を丸くする */\r\n  padding: 8px !important;  /* 内側の余白を調整 */\r\n  box-sizing: border-box !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:03:01 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:05:10 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.o3j99 {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:05:49 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:12:01 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1) blur(2px);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:12:20 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1) blur(1px);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:13:18 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1) saturate(100%);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:13:37 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: hue-rotate(90deg) brightness(1) saturate(150%);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "dataType": "javascript",
+      "bodyData": {
+        "document": {
+          "savedAt": "2/2/2025, 10:14:26 PM",
+          "sources": [
+            {
+              "fileExtension": "css",
+              "filename": "mystyle.css",
+              "content": "body {\r\n  background: none !important;\r\n  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;\r\n}\r\n\r\n.c93Gbe {\r\n  background: transparent !important;\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  filter: sepia(80%) brightness(1) saturate(150%);\r\n}\r\n\r\n@keyframes pulseLogo {\r\n  0% { transform: scale(1); }\r\n  50% { transform: scale(1.5); } \r\n  100% { transform: scale(1); }\r\n}\r\n\r\nimg[alt=\"Google\"] {\r\n  animation: pulseLogo 2s infinite ease-in-out;\r\n}\r\n"
+            }
+          ]
+        }
+      }
     }
   ]
 }
