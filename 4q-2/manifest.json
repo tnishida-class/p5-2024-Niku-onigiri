@@ -1,0 +1,19 @@
+{
+    "name": "Sample Chrome Extension",
+    "description": "Google検索画面の背景をGIFに変更する etc.",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+      
+      {
+        "matches":["https://www.google.com/", "https://www.google.com/?hl=*"],
+        "css": ["mystyle.css"],
+        "js": ["content_script.js"]
+      },
+      {
+        "matches":["https://news.yahoo.co.jp/*"],
+        "js": ["content_script.js"]
+      }
+    ]
+  }
+  

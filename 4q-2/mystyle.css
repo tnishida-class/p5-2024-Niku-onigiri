@@ -1,0 +1,22 @@
+body {
+  background: none !important;
+  background-image: url('https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif') !important;
+}
+
+.c93Gbe {
+  background: transparent !important;
+}
+
+img[alt="Google"] {
+  filter: sepia(80%) brightness(1) saturate(150%);
+}
+
+@keyframes pulseLogo {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5); } 
+  100% { transform: scale(1); }
+}
+
+img[alt="Google"] {
+  animation: pulseLogo 2s infinite ease-in-out;
+}
